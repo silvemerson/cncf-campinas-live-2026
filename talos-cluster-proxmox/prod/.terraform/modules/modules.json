@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"controlplane","Source":"../modules/vm-talos","Dir":"../modules/vm-talos"},{"Key":"talos_cluster","Source":"../modules/talos-cluster","Dir":"../modules/talos-cluster"},{"Key":"worker","Source":"../modules/vm-talos","Dir":"../modules/vm-talos"}]}
