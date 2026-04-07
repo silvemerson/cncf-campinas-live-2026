@@ -1,0 +1,66 @@
+# ---------------------------------------------------------------------------
+# Proxmox provider
+# ---------------------------------------------------------------------------
+proxmox_endpoint         = "https://192.168.1.100:8006"
+proxmox_api_token_id     = "root@pam!terraform-token"
+proxmox_api_token_secret = "REPLACE-ME"
+proxmox_insecure         = true
+proxmox_ssh_username     = "root"
+proxmox_ssh_password     = "REPLACE-ME"
+
+# ---------------------------------------------------------------------------
+# Proxmox placement
+# ---------------------------------------------------------------------------
+target_node          = "pve"
+disk_storage         = "local-lvm"
+cloud_init_datastore = "local-lvm"
+snippets_datastore   = "local"
+
+# ---------------------------------------------------------------------------
+# Talos image
+# ---------------------------------------------------------------------------
+talos_version       = "1.9.5"
+talos_template_vmid = 100
+
+# ---------------------------------------------------------------------------
+# Network
+# ---------------------------------------------------------------------------
+network_bridge       = "vmbr0"
+network_vlan_id      = 0
+network_prefix       = 24
+network_gateway_ipv4 = "192.168.1.1"
+dns_servers          = ["8.8.8.8", "1.1.1.1"]
+
+# ---------------------------------------------------------------------------
+# Cluster
+# ---------------------------------------------------------------------------
+cluster_name     = "my-cluster"
+controlplane_vip = ""   # optional HA virtual IP — leave empty to use first CP IP
+
+controlplane_ips = [
+  "192.168.1.201",
+  "192.168.1.202",
+  "192.168.1.203",
+]
+
+worker_ips = [
+  "192.168.1.211",
+  "192.168.1.212",
+  "192.168.1.213",
+]
+
+# ---------------------------------------------------------------------------
+# Controlplane specs
+# ---------------------------------------------------------------------------
+controlplane_start_id  = 201
+controlplane_cores     = 2
+controlplane_memory_mb = 2048
+controlplane_disk_gb   = 20
+
+# ---------------------------------------------------------------------------
+# Worker specs
+# ---------------------------------------------------------------------------
+worker_start_id  = 211
+worker_cores     = 4
+worker_memory_mb = 4096
+worker_disk_gb   = 40

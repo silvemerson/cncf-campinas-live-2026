@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" width="920" height="560">
+  <defs>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00E6CC"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f15a29"/>
+    </marker>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0B1426"/>
+      <stop offset="100%" style="stop-color:#111e30"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="920" height="560" fill="url(#bgGrad)" rx="10"/>
+
+  <!-- ── EXTERNAL: talosctl ── -->
+  <rect x="598" y="10" width="306" height="62" rx="6"
+        fill="#0f1d30" stroke="#00E6CC" stroke-width="1.8"/>
+  <text x="751" y="31" fill="#00E6CC" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="14" font-weight="700" text-anchor="middle">talosctl</text>
+  <text x="751" y="47" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle">gRPC · mTLS · porta 50000</text>
+  <text x="751" y="61" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle">certificado assinado pela CA do cluster</text>
+
+  <!-- Arrow talosctl → apid -->
+  <line x1="751" y1="72" x2="751" y2="100"
+        stroke="#00E6CC" stroke-width="1.8" marker-end="url(#arrowGreen)"/>
+
+  <!-- ── TALOS OS outer boundary ── -->
+  <rect x="10" y="82" width="900" height="378" rx="8"
+        fill="none" stroke="#00E6CC" stroke-width="1.5" stroke-dasharray="7,4"/>
+  <text x="26" y="97" fill="#00E6CC" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" font-weight="700" letter-spacing="2">TALOS LINUX OS</text>
+
+  <!-- ── apid ── -->
+  <rect x="20" y="102" width="880" height="38" rx="5"
+        fill="#1a3040" stroke="#4ECDC4" stroke-width="1.2"/>
+  <text x="460" y="117" fill="#4ECDC4" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="12" font-weight="700" text-anchor="middle">apid</text>
+  <text x="460" y="132" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle">Gateway de API gRPC · autentica via mTLS · roteia requisições para machined</text>
+
+  <!-- ── machined box ── -->
+  <rect x="20" y="148" width="880" height="302" rx="6"
+        fill="#0c1720" stroke="#f15a29" stroke-width="1.8"/>
+  <text x="460" y="167" fill="#f15a29" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="13" font-weight="700" text-anchor="middle">machined — PID 1</text>
+  <text x="460" y="181" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle">Ciclo de vida do nó · aplica MachineConfig · inicia serviços · expõe API</text>
+
+  <!-- System services label -->
+  <text x="38" y="200" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" font-weight="600" letter-spacing="1.2">SERVIÇOS DO SISTEMA</text>
+
+  <!-- networkd -->
+  <rect x="38" y="206" width="130" height="46" rx="4"
+        fill="#162040" stroke="#4ECDC4" stroke-width="1"/>
+  <text x="103" y="224" fill="#4ECDC4" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="11" font-weight="600" text-anchor="middle">networkd</text>
+  <text x="103" y="239" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">interfaces · DNS · VIP</text>
+  <text x="103" y="250" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">roteamento</text>
+
+  <!-- trustd -->
+  <rect x="178" y="206" width="130" height="46" rx="4"
+        fill="#162040" stroke="#4ECDC4" stroke-width="1"/>
+  <text x="243" y="224" fill="#4ECDC4" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="11" font-weight="600" text-anchor="middle">trustd</text>
+  <text x="243" y="239" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">PKI · root of trust</text>
+  <text x="243" y="250" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">distribuição de certs</text>
+
+  <!-- udevd -->
+  <rect x="318" y="206" width="130" height="46" rx="4"
+        fill="#162040" stroke="#4ECDC4" stroke-width="1"/>
+  <text x="383" y="224" fill="#4ECDC4" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="11" font-weight="600" text-anchor="middle">udevd</text>
+  <text x="383" y="239" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">dispositivos</text>
+  <text x="383" y="250" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">hot-plug events</text>
+
+  <!-- containerd system namespace -->
+  <rect x="458" y="206" width="432" height="46" rx="4"
+        fill="#162040" stroke="#4ECDC4" stroke-width="1"/>
+  <text x="674" y="224" fill="#4ECDC4" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="11" font-weight="600" text-anchor="middle">containerd  ·  namespace: system</text>
+  <text x="674" y="239" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">containers internos do Talos OS (não acessíveis por workloads)</text>
+  <text x="674" y="250" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">runtime: apid · machined internal · system extensions</text>
+
+  <!-- ── containerd k8s.io namespace box ── -->
+  <rect x="38" y="262" width="852" height="178" rx="5"
+        fill="#0a1520" stroke="#00E6CC" stroke-width="1.5"/>
+  <text x="464" y="278" fill="#00E6CC" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="10" font-weight="700" text-anchor="middle">containerd  ·  namespace: k8s.io</text>
+
+  <!-- K8s components — top row -->
+  <!-- kubelet -->
+  <rect x="52" y="285" width="120" height="54" rx="4"
+        fill="#162a40" stroke="#00C4A7" stroke-width="1"/>
+  <text x="112" y="306" fill="#00E6CC" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="11" font-weight="600" text-anchor="middle">kubelet</text>
+  <text x="112" y="320" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">agente do nó</text>
+  <text x="112" y="332" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">todos os nós</text>
+
+  <!-- etcd -->
+  <rect x="182" y="285" width="120" height="54" rx="4"
+        fill="#162a40" stroke="#00C4A7" stroke-width="1"/>
+  <text x="242" y="306" fill="#00E6CC" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="11" font-weight="600" text-anchor="middle">etcd</text>
+  <text x="242" y="320" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">state do cluster</text>
+  <text x="242" y="332" fill="#f15a29" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">★ control plane</text>
+
+  <!-- kube-apiserver -->
+  <rect x="312" y="285" width="148" height="54" rx="4"
+        fill="#162a40" stroke="#00C4A7" stroke-width="1"/>
+  <text x="386" y="306" fill="#00E6CC" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="11" font-weight="600" text-anchor="middle">kube-apiserver</text>
+  <text x="386" y="320" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">static pod</text>
+  <text x="386" y="332" fill="#f15a29" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">★ control plane</text>
+
+  <!-- controller-manager -->
+  <rect x="470" y="285" width="172" height="54" rx="4"
+        fill="#162a40" stroke="#00C4A7" stroke-width="1"/>
+  <text x="556" y="306" fill="#00E6CC" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="11" font-weight="600" text-anchor="middle">controller-manager</text>
+  <text x="556" y="320" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">static pod</text>
+  <text x="556" y="332" fill="#f15a29" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">★ control plane</text>
+
+  <!-- kube-scheduler -->
+  <rect x="652" y="285" width="226" height="54" rx="4"
+        fill="#162a40" stroke="#00C4A7" stroke-width="1"/>
+  <text x="765" y="306" fill="#00E6CC" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="11" font-weight="600" text-anchor="middle">kube-scheduler</text>
+  <text x="765" y="320" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">static pod</text>
+  <text x="765" y="332" fill="#f15a29" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">★ control plane</text>
+
+  <!-- Workloads row -->
+  <rect x="52" y="350" width="826" height="80" rx="4"
+        fill="#0d1822" stroke="#2d4a6b" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="464" y="367" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" font-weight="600" text-anchor="middle" letter-spacing="1">PODS DO USUÁRIO</text>
+
+  <!-- pod 1 -->
+  <rect x="66" y="373" width="94" height="48" rx="3"
+        fill="#131e2e" stroke="#2d4a6b" stroke-width="1"/>
+  <text x="113" y="390" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle" font-weight="600">pod</text>
+  <text x="113" y="403" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">app-frontend</text>
+  <text x="113" y="415" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">nginx:alpine</text>
+
+  <!-- pod 2 -->
+  <rect x="170" y="373" width="94" height="48" rx="3"
+        fill="#131e2e" stroke="#2d4a6b" stroke-width="1"/>
+  <text x="217" y="390" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle" font-weight="600">pod</text>
+  <text x="217" y="403" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">app-backend</text>
+  <text x="217" y="415" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">golang:1.22</text>
+
+  <!-- pod 3 -->
+  <rect x="274" y="373" width="94" height="48" rx="3"
+        fill="#131e2e" stroke="#2d4a6b" stroke-width="1"/>
+  <text x="321" y="390" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle" font-weight="600">pod</text>
+  <text x="321" y="403" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">monitoring</text>
+  <text x="321" y="415" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="8" text-anchor="middle">prometheus</text>
+
+  <text x="600" y="401" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="14" text-anchor="middle">· · · · · · · ·</text>
+
+  <!-- ── Linux Kernel ── -->
+  <rect x="10" y="468" width="900" height="44" rx="6"
+        fill="#112a1e" stroke="#00C4A7" stroke-width="1.5"/>
+  <text x="460" y="487" fill="#00E6CC" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="12" font-weight="700" text-anchor="middle">Linux Kernel</text>
+  <text x="460" y="504" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle">embutido na imagem do OS · SquashFS read-only montado em memória · imutável · sem modificação em runtime</text>
+
+  <!-- ── Disk partitions ── -->
+  <rect x="10" y="520" width="900" height="32" rx="5"
+        fill="#141e30" stroke="#2d4a6b" stroke-width="1"/>
+
+  <!-- Partition: EFI -->
+  <rect x="14" y="523" width="72" height="26" rx="3" fill="#1a2640" stroke="#2d4a6b"/>
+  <text x="50" y="540" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle" font-weight="600">EFI</text>
+
+  <!-- Partition: BOOT -->
+  <rect x="90" y="523" width="80" height="26" rx="3" fill="#1a2640" stroke="#2d4a6b"/>
+  <text x="130" y="540" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle" font-weight="600">BOOT</text>
+
+  <!-- Partition: META -->
+  <rect x="174" y="523" width="72" height="26" rx="3" fill="#1a2640" stroke="#2d4a6b"/>
+  <text x="210" y="540" fill="#8B9DC3" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle" font-weight="600">META</text>
+
+  <!-- Partition: STATE -->
+  <rect x="250" y="523" width="184" height="26" rx="3" fill="#162a40" stroke="#4ECDC4" stroke-width="1.2"/>
+  <text x="342" y="540" fill="#4ECDC4" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle" font-weight="600">STATE  ·  MachineConfig  ·  certificados</text>
+
+  <!-- Partition: EPHEMERAL -->
+  <rect x="438" y="523" width="468" height="26" rx="3" fill="#162a40" stroke="#4ECDC4" stroke-width="1.2"/>
+  <text x="672" y="540" fill="#4ECDC4" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" text-anchor="middle" font-weight="600">EPHEMERAL  /var  ·  etcd db  ·  imagens containerd  ·  logs dos pods</text>
+</svg>

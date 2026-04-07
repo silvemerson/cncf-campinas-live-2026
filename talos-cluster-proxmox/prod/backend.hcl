@@ -1,0 +1,10 @@
+bucket                      = "terraform-proxmox"
+key                         = "talos-cluster/prod/terraform.tfstate"
+endpoint                    = "http://rustfs.silvalabs.local:9000"
+region                      = "us-east-1"
+access_key                  = "rustfsadmin"
+secret_key                  = "rustfsadmin"
+skip_credentials_validation  = true
+skip_region_validation       = true
+skip_requesting_account_id   = true
+force_path_style             = true
