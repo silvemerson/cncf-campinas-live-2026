@@ -196,3 +196,18 @@ variable "worker_disk_gb" {
   type        = number
   default     = 40
 }
+
+# ---------------------------------------------------------------------------
+# Cilium CNI
+# ---------------------------------------------------------------------------
+variable "cilium_enabled" {
+  description = "Install Cilium as CNI (disables Flannel and kube-proxy)."
+  type        = bool
+  default     = true
+}
+
+variable "cilium_version" {
+  description = "Cilium Helm chart version."
+  type        = string
+  default     = "1.17.1"
+}

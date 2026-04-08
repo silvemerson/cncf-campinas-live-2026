@@ -60,3 +60,9 @@ variable "controlplane_vip" {
   type        = string
   default     = ""
 }
+
+variable "cilium_enabled" {
+  description = "Disable the default Flannel CNI and kube-proxy so Cilium can be installed as CNI."
+  type        = bool
+  default     = true
+}

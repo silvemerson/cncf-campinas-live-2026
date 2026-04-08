@@ -112,6 +112,20 @@ data "talos_machine_configuration" "controlplane" {
           ]
         }
       })
+    ] : [],
+    var.cilium_enabled ? [
+      yamlencode({
+        cluster = {
+          network = {
+            cni = {
+              name = "none"
+            }
+          }
+          proxy = {
+            disabled = true
+          }
+        }
+      })
     ] : []
   )
 }
@@ -128,25 +142,41 @@ data "talos_machine_configuration" "worker" {
   machine_secrets  = talos_machine_secrets.this.machine_secrets
   talos_version    = "v${var.talos_version}"
 
-  config_patches = [
-    yamlencode({
-      machine = {
-        install = {
-          image = "factory.talos.dev/nocloud-installer/${var.talos_schematic_id}:v${var.talos_version}"
-        }
-        network = {
-          hostname    = each.key
-          nameservers = var.dns_servers
-          interfaces = [{
-            interface = "eth0"
-            addresses = ["${each.value.ip}/${each.value.prefix}"]
-            routes = [{
-              network = "0.0.0.0/0"
-              gateway = each.value.gateway
+  config_patches = concat(
+    [
+      yamlencode({
+        machine = {
+          install = {
+            image = "factory.talos.dev/nocloud-installer/${var.talos_schematic_id}:v${var.talos_version}"
+          }
+          network = {
+            hostname    = each.key
+            nameservers = var.dns_servers
+            interfaces = [{
+              interface = "eth0"
+              addresses = ["${each.value.ip}/${each.value.prefix}"]
+              routes = [{
+                network = "0.0.0.0/0"
+                gateway = each.value.gateway
+              }]
             }]
-          }]
+          }
         }
-      }
-    })
-  ]
+      })
+    ],
+    var.cilium_enabled ? [
+      yamlencode({
+        cluster = {
+          network = {
+            cni = {
+              name = "none"
+            }
+          }
+          proxy = {
+            disabled = true
+          }
+        }
+      })
+    ] : []
+  )
 }

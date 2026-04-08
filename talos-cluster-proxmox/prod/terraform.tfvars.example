@@ -64,3 +64,9 @@ worker_start_id  = 211
 worker_cores     = 4
 worker_memory_mb = 4096
 worker_disk_gb   = 40
+
+# ---------------------------------------------------------------------------
+# Cilium CNI
+# ---------------------------------------------------------------------------
+cilium_enabled = true
+cilium_version = "1.17.1"

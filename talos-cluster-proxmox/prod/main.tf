@@ -13,6 +13,7 @@ terraform {
   }
 }
 
+
 provider "proxmox" {
   endpoint  = var.proxmox_endpoint
   api_token = "${var.proxmox_api_token_id}=${var.proxmox_api_token_secret}"
@@ -62,6 +63,8 @@ module "talos_cluster" {
   talos_schematic_id = var.talos_schematic_id
   dns_servers        = var.dns_servers
   controlplane_vip   = var.controlplane_vip
+
+  cilium_enabled = var.cilium_enabled
 
   controlplane_nodes = {
     for k, v in local.controlplane_nodes : k => {
@@ -164,4 +167,58 @@ data "talos_client_configuration" "this" {
   client_configuration = module.talos_cluster.client_configuration
   endpoints            = var.controlplane_vip != "" ? [var.controlplane_vip] : var.controlplane_ips
   nodes                = var.controlplane_ips
+}
+
+# ---------------------------------------------------------------------------
+# Cilium CNI — installed via Helm after bootstrap
+# ---------------------------------------------------------------------------
+resource "terraform_data" "cilium" {
+  count = var.cilium_enabled ? 1 : 0
+
+  depends_on = [data.talos_cluster_kubeconfig.this]
+
+  triggers_replace = [var.cilium_version]
+
+  provisioner "local-exec" {
+    interpreter = ["/bin/sh", "-c"]
+    command     = <<-EOT
+      set -e
+      KUBECONFIG_FILE=$(mktemp /tmp/talos-kubeconfig-XXXXXX.yaml)
+      trap 'rm -f "$KUBECONFIG_FILE"' EXIT
+
+      cat > "$KUBECONFIG_FILE" <<'KUBEEOF'
+${data.talos_cluster_kubeconfig.this.kubeconfig_raw}
+KUBEEOF
+
+      echo "Waiting for Kubernetes API server to become ready..."
+      RETRIES=0
+      until kubectl --kubeconfig "$KUBECONFIG_FILE" get nodes > /dev/null 2>&1; do
+        RETRIES=$((RETRIES + 1))
+        if [ "$RETRIES" -ge 30 ]; then
+          echo "ERROR: API server not ready after 5 minutes."
+          exit 1
+        fi
+        echo "  API server not ready yet (attempt $RETRIES/30), retrying in 10s..."
+        sleep 10
+      done
+      echo "API server is ready."
+
+      helm repo add cilium https://helm.cilium.io/ --force-update
+      helm repo update cilium
+
+      helm upgrade --install cilium cilium/cilium \
+        --version "${var.cilium_version}" \
+        --namespace kube-system \
+        --kubeconfig "$KUBECONFIG_FILE" \
+        --set ipam.mode=kubernetes \
+        --set kubeProxyReplacement=true \
+        --set k8sServiceHost="${coalesce(var.controlplane_vip, var.controlplane_ips[0])}" \
+        --set k8sServicePort=6443 \
+        --set securityContext.capabilities.ciliumAgent="{NET_ADMIN,NET_RAW,SYS_PTRACE,SYS_ADMIN,AUDIT_WRITE,NET_BIND_SERVICE,PERFMON,BPF}" \
+        --set securityContext.capabilities.cleanCiliumState="{NET_ADMIN,SYS_ADMIN,SYS_RESOURCE}" \
+        --set cgroup.autoMount.enabled=false \
+        --set cgroup.hostRoot=/sys/fs/cgroup \
+        --wait --timeout 5m
+    EOT
+  }
 }
